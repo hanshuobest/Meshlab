@@ -66,9 +66,10 @@ class CUsedTypesO: public vcg::UsedTypes < vcg::Use<CVertexO>::AsVertexType,
 
 
 // The Main Vertex Class
+// 主要的顶点类
 // Most of the attributes are optional and must be enabled before use.
+// 大部分属性是可选的并且在使用前必须启动
 // Each vertex needs 40 byte, on 32bit arch. and 44 byte on 64bit arch.
-
 class CVertexO  : public vcg::Vertex< CUsedTypesO,
     vcg::vertex::InfoOcf,           /*  4b */
     vcg::vertex::Coord3m,           /* 12b */
@@ -82,7 +83,8 @@ class CVertexO  : public vcg::Vertex< CUsedTypesO,
     vcg::vertex::CurvaturefOcf,     /*  0b */
     vcg::vertex::CurvatureDirmOcf,  /*  0b */
     vcg::vertex::RadiusmOcf         /*  0b */
->{
+>
+{
 };
 
 

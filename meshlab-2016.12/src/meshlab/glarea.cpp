@@ -183,7 +183,8 @@ void GLArea::initializeGL()
     trackball_light.center=Point3f(0, 0, 0);
     trackball_light.radius= 1;
     GLenum err = glewInit();
-    if (err != GLEW_OK ) {
+    if (err != GLEW_OK ) 
+	{
         assert(0);
     }
 	//doneCurrent();
@@ -754,6 +755,7 @@ void GLArea::displayRealTimeLog(QPainter *painter)
     }
 
     // After the rederaw we clear the RealTimeLog buffer!
+	// 重绘之后我们清除缓存
     md()->Log.RealTimeLogText.clear();
     painter->restore();
     painter->beginNativePainting();

@@ -189,17 +189,19 @@ class TriMesh
     typedef Box3<ScalarType> BoxType;
 
     /// Container of vertices, usually a vector.
-    VertContainer vert;
+    VertContainer vert;	//顶点容器
+
     /// Current number of vertices; this member is for internal use only. You should always use the VN() member
     int vn;
+
     /// Current number of vertices
-	// 当前顶点数
+	// 返回当前顶点数
     inline int VN() const { return vn; }
 
     /// Container of edges, usually a vector.
     EdgeContainer edge;
     /// Current number of edges; this member is for internal use only. You should always use the EN() member
-    int en;
+    int en;//当前边的数量
     /// Current number of edges
     inline int EN() const { return en; }
 
@@ -214,11 +216,12 @@ class TriMesh
     /// Container of half edges, usually a vector.
     HEdgeContainer hedge;
     /// Current number of halfedges; this member is for internal use only. You should always use the HN() member
-    int hn;
+    int hn;//半边的数量
     /// Current number of halfedges;
     inline int HN() const { return hn; }
 
     /// Bounding box of the mesh
+	//  网格边界盒子
     Box3<typename TriMesh::VertexType::CoordType::ScalarType> bbox;
 
   /// Nomi di textures
@@ -238,7 +241,8 @@ class TriMesh
 
 
     template <class ATTR_TYPE, class CONT>
-    class AttributeHandle{
+    class AttributeHandle
+	{
     public:
         AttributeHandle(){_handle=(SimpleTempData<CONT,ATTR_TYPE> *)NULL;}
         AttributeHandle( void *ah,const int & n):_handle ( (SimpleTempData<CONT,ATTR_TYPE> *)ah ),n_attr(n){}
@@ -261,7 +265,8 @@ class TriMesh
     };
 
     template <class ATTR_TYPE>
-    class PerVertexAttributeHandle: public AttributeHandle<ATTR_TYPE,VertContainer>{
+    class PerVertexAttributeHandle: public AttributeHandle<ATTR_TYPE,VertContainer>
+	{
     public:
         PerVertexAttributeHandle():AttributeHandle<ATTR_TYPE,VertContainer>(){}
                 PerVertexAttributeHandle( void *ah,const int & n):AttributeHandle<ATTR_TYPE,VertContainer>(ah,n){}
@@ -316,6 +321,7 @@ class TriMesh
 
 private:
     /// The per-mesh color. Not very useful and meaningful...
+	//  每个网格的颜色，并不是很有用
     Color4b c;
 public:
 
@@ -335,7 +341,8 @@ public:
       Clear();
     }
 
-     int Mem(const int & nv, const int & nf) const  {
+     int Mem(const int & nv, const int & nf) const 
+	 {
         typename std::set< PointerToAttribute>::const_iterator i;
         int size = 0;
         size += sizeof(TriMesh)+sizeof(VertexType)*nv+sizeof(FaceType)*nf;
@@ -416,7 +423,8 @@ private:
 };	// end class Mesh
 
 /// Initialize the imark-system of the faces
-template <class MeshType> inline  void InitFaceIMark(MeshType & m)
+template <class MeshType> 
+inline  void InitFaceIMark(MeshType & m)
 {
     typename MeshType::FaceIterator f;
 
@@ -426,7 +434,8 @@ template <class MeshType> inline  void InitFaceIMark(MeshType & m)
 }
 
 /// Initialize the imark-system of the vertices
-template <class MeshType> inline  void InitVertexIMark(MeshType & m)
+template <class MeshType> 
+inline  void InitVertexIMark(MeshType & m)
 {
     typename MeshType::VertexIterator vi;
 

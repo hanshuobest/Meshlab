@@ -26,7 +26,8 @@
 #ifndef __VCG_VERTEX_PLUS
 #define __VCG_VERTEX_PLUS
 
-namespace vcg {
+namespace vcg
+{
 
 
 /* The base class form which we start to add our components.
@@ -50,7 +51,6 @@ MUST be defined here.
 I.e. IsD() that uses the overridden Flags() member must be defined here.
 
 */
-
 template <class UserTypes,
           template <typename> class A, template <typename> class B,
           template <typename> class C, template <typename> class D,
@@ -62,10 +62,8 @@ class VertexArityMax: public Arity12<vertex::EmptyCore<UserTypes>, A, B, C, D, E
 
 // ----- Flags stuff -----
 public:
-
-
-
- 	enum { 
+ 	enum 
+	{ 
 		
 		DELETED    = 0x0001,		// This bit indicate that the vertex is deleted from the mesh
 		NOTREAD    = 0x0002,		// This bit indicate that the vertex of the mesh is not readable
@@ -91,7 +89,10 @@ public:
     bool IsRW() const {return (this->cFlags() & (NOTREAD | NOTWRITE)) == 0;}
 
 	// 检查顶点是否被选择
-    bool IsS() const {return (this->cFlags() & SELECTED) != 0;}///  checks if the vertex is Selected检查点是否被选择
+    bool IsS() const 
+	{
+		return (this->cFlags() & SELECTED) != 0;
+	}///  checks if the vertex is Selected检查点是否被选择
 
 	// 检查顶点是否在边上
     bool IsB() const {return (this->cFlags() & BORDER) != 0;}///  checks if the vertex is a border one
@@ -103,12 +104,18 @@ public:
 	/** Set the flag value
 		@param flagp Valore da inserire nel flag
 	*/
-	void SetFlags(int flagp) {this->Flags()=flagp;}
+	void SetFlags(int flagp) 
+	{
+		this->Flags()=flagp;
+	}
 
 	/** Set the flag value
 		@param flagp Valore da inserire nel flag
 	*/
-	void ClearFlags() {this->Flags()=0;}
+	void ClearFlags() 
+	{
+		this->Flags()=0;
+	}
 	void SetD() {this->Flags() |=DELETED;}///  deletes the vertex from the mesh
 	void ClearD() {this->Flags() &=(~DELETED);}///  un-delete a vertex
 	void SetR() {this->Flags() &=(~NOTREAD);}///  marks the vertex as readable
@@ -141,7 +148,8 @@ public:
 	// Note you must deallocate bit in the inverse order of the allocation (as in a stack)
 	static inline bool DeleteBitFlag(int bitval)
 	{
-	  if(FirstUnusedBitFlag()>>1==bitval) {
+	  if(FirstUnusedBitFlag()>>1==bitval) 
+	  {
 		FirstUnusedBitFlag() = FirstUnusedBitFlag()>>1;
 		return true;
 	  }
@@ -160,9 +168,12 @@ public:
 
  template<class BoxType>
   void GetBBox( BoxType & bb ) const
-  {	  bb.Set(this->cP());  }
+  {	  
+	  bb.Set(this->cP()); 
+  }
 
-          };
+         
+ };
 
           
 /*
@@ -201,8 +212,12 @@ template <class UserTypes,
           template <typename> class G = DefaultDeriver, template <typename> class H = DefaultDeriver,
 					template <typename> class I = DefaultDeriver, template <typename> class J = DefaultDeriver,
 					template <typename> class K = DefaultDeriver, template <typename> class L = DefaultDeriver>
-							class Vertex: public VertexArityMax<UserTypes, A, B, C, D, E, F, G, H, I, J, K, L>  {
-			 public: typedef AllTypes::AVertexType IAm; typedef UserTypes TypesPool;};
+							class Vertex: public VertexArityMax<UserTypes, A, B, C, D, E, F, G, H, I, J, K, L>  
+							{
+							public: 
+								typedef AllTypes::AVertexType IAm; 
+								typedef UserTypes TypesPool;
+							};
 
 }// end namespace
 #endif
