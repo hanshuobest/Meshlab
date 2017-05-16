@@ -493,53 +493,66 @@ public:
 
     //set the current raster to be the one with the given ID
     void setCurrentRaster( int new_curr_id );
-    void setCurrent(MeshModel   *newCur)  { setCurrentMesh(newCur->id());}
-    void setCurrent(RasterModel *newCur)  { setCurrentRaster(newCur->id());}
+    void setCurrent(MeshModel   *newCur)  
+	{ 
+		setCurrentMesh(newCur->id());
+	}
+    void setCurrent(RasterModel *newCur) 
+	{ 
+		setCurrentRaster(newCur->id());
+	}
 
     /// methods to access the set of Meshes in a ordered fashion.
-    MeshModel   *nextVisibleMesh(MeshModel *_m = NULL)
-    {
-      MeshModel *newM = nextMesh(_m);
-      if(newM==0)
-        return newM;
+	//  有序的方式访问网格集
+	MeshModel   *nextVisibleMesh(MeshModel *_m = NULL)
+	{
+		MeshModel *newM = nextMesh(_m);
+		if (newM == 0)
+			return newM;
 
-      if(newM->isVisible())
-        return newM;
-      else
-        return nextVisibleMesh(newM);
-    }
+		if (newM->isVisible())
+			return newM;
+		else
+			return nextVisibleMesh(newM);
+	}
 
-    MeshModel   *nextMesh(MeshModel *_m = NULL)
-    {
-      if(_m==0 && meshList.size()>0)
-        return meshList.at(0);
-      for (int i = 0; i < meshList.size(); ++i) {
-          if (meshList.at(i) == _m)
-          {
-            if(i+1 < meshList.size())
-              return meshList.at(i+1);
-          }
-      }
-      return 0;
-    }
+	MeshModel   *nextMesh(MeshModel *_m = NULL)
+	{
+		if (_m == 0 && meshList.size() > 0)
+			return meshList.at(0);
+		for (int i = 0; i < meshList.size(); ++i)
+		{
+			if (meshList.at(i) == _m)
+			{
+				if (i + 1 < meshList.size())
+					return meshList.at(i + 1);
+			}
+		}
+		return 0;
+	}
     /// methods to access the set of Meshes in a ordered fashion.
-    RasterModel   *nextRaster(RasterModel *_rm = NULL) {
-      for (int i = 0; i < rasterList.size(); ++i) {
-          if (rasterList.at(i) == _rm)
-          {
-            if(i+1 < rasterList.size())
-              return rasterList.at(i+1);
-          }
-      }
-      return 0;
-    }
+	/// 以有序的方式访问网格集的方法。
+	RasterModel   *nextRaster(RasterModel *_rm = NULL)
+	{
+		for (int i = 0; i < rasterList.size(); ++i) 
+		{
+			if (rasterList.at(i) == _rm)
+			{
+				if (i + 1 < rasterList.size())
+					return rasterList.at(i + 1);
+			}
+		}
+		return 0;
+	}
 
-    MeshModel *mm() {
+    MeshModel *mm()
+	{
         return currentMesh;
     }
 
     //Could return 0 if no raster has been selected
-    RasterModel *rm(){
+    RasterModel *rm()
+	{
         return currentRaster;
     }
 
@@ -548,8 +561,14 @@ public:
     QList<MeshModel *> meshList;
     /// The list of the raster models of the project
     QList<RasterModel *> rasterList;
-    int newMeshId() {return meshIdCounter++;}
-    int newRasterId() {return rasterIdCounter++;}
+    int newMeshId() 
+	{
+		return meshIdCounter++;
+	}
+    int newRasterId() 
+	{
+		return rasterIdCounter++;
+	}
 
     //functions to update the document entities (meshes and/or rasters) during the filters execution
     //WARNING! please note that if you have to update both meshes and rasters calling updateRenderState function it's far more efficient

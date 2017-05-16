@@ -324,11 +324,12 @@ private:
 public:
     PluginManager PM;
 
-    MeshDocument *meshDoc() {
-        if (currentViewContainer() != NULL)
+	MeshDocument *meshDoc()
+	{
+		if (currentViewContainer() != NULL)
 			return &currentViewContainer()->meshDoc;
 		return NULL;
-    }
+	}
 
     inline vcg::QtThreadSafeMemoryInfo* memoryInfoManager() const {return gpumeminfo;} 
     const RichParameterSet& currentGlobalPars() const { return currentGlobalParams; }

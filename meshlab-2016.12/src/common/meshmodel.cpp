@@ -123,47 +123,47 @@ void MeshDocument::setCurrentRaster( int i)
 }
 
 template <class LayerElement>
-QString NameDisambiguator(QList<LayerElement*> &elemList, QString meshLabel )
+QString NameDisambiguator(QList<LayerElement*> &elemList, QString meshLabel)
 {
-    QString newName=meshLabel;
-    typename QList<LayerElement*>::iterator mmi;
+	QString newName = meshLabel;
+	typename QList<LayerElement*>::iterator mmi;
 
-    for(mmi=elemList.begin(); mmi!=elemList.end(); ++mmi)
-    {
-        if((*mmi)->label() == newName) // if duplicated name found
-        {
-            QFileInfo fi((*mmi)->label());
-            QString baseName = fi.baseName(); //  all characters in the file up to the first '.' Eg "/tmp/archive.tar.gz" -> "archive"
-            QString suffix = fi.suffix();
-            bool ok;
+	for (mmi = elemList.begin(); mmi != elemList.end(); ++mmi)
+	{
+		if ((*mmi)->label() == newName) // if duplicated name found
+		{
+			QFileInfo fi((*mmi)->label());
+			QString baseName = fi.baseName(); //  all characters in the file up to the first '.' Eg "/tmp/archive.tar.gz" -> "archive"
+			QString suffix = fi.suffix();
+			bool ok;
 
-            // if name ends with a number between parenthesis (XXX),
-            // it was himself a duplicated name, and we need to
-            // just increase the number between parenthesis
-            int numDisamb;
-            int startDisamb;
-            int endDisamb;
+			// if name ends with a number between parenthesis (XXX),
+			// it was himself a duplicated name, and we need to
+			// just increase the number between parenthesis
+			int numDisamb;
+			int startDisamb;//(开始的位置
+			int endDisamb;  //)结束的位置
 
-            startDisamb = baseName.lastIndexOf("(");
-            endDisamb   = baseName.lastIndexOf(")");
-            if((startDisamb!=-1)&&(endDisamb!=-1))
-                numDisamb = (baseName.mid((startDisamb+1),(endDisamb-startDisamb-1))).toInt(&ok);
-            else
-                numDisamb = 0;
+			startDisamb = baseName.lastIndexOf("(");
+			endDisamb = baseName.lastIndexOf(")");
+			if ((startDisamb != -1) && (endDisamb != -1))
+				numDisamb = (baseName.mid((startDisamb + 1), (endDisamb - startDisamb - 1))).toInt(&ok);
+			else
+				numDisamb = 0;
 
-            if(startDisamb!=-1)
-                newName = baseName.left(startDisamb)+ "(" + QString::number(numDisamb+1) + ")";
-            else
-                newName = baseName + "(" + QString::number(numDisamb+1) + ")";
+			if (startDisamb != -1)
+				newName = baseName.left(startDisamb) + "(" + QString::number(numDisamb + 1) + ")";
+			else
+				newName = baseName + "(" + QString::number(numDisamb + 1) + ")";
 
-            if (suffix != QString(""))
-                newName = newName + "." + suffix;
+			if (suffix != QString(""))
+				newName = newName + "." + suffix;
 
-            // now recurse to see if the new name is free
-            newName = NameDisambiguator(elemList, newName);
-        }
-    }
-    return newName;
+			// now recurse to see if the new name is free
+			newName = NameDisambiguator(elemList, newName);
+		}
+	}
+	return newName;
 }
 
 
