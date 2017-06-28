@@ -169,9 +169,12 @@ void GLArea::initializeGL()
 {
 	makeCurrent();
     glShadeModel(GL_SMOOTH);
+	// 设置像素的存储格式
     glPixelStorei(GL_PACK_ROW_LENGTH, 0);
+	// 内存中字节的对齐方式
     glPixelStorei(GL_PACK_ALIGNMENT, 1);
     glEnable(GL_DEPTH_TEST);
+	// 自动归一化法向量
     glEnable(GL_NORMALIZE);
     static float diffuseColor[]={1.0,1.0,1.0,1.0};
     glEnable(GL_LIGHT0);

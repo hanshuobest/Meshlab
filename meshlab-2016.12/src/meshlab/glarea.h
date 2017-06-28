@@ -132,6 +132,7 @@ public:
     MeshModel *mm(){ if (mvc() == NULL) return NULL;return mvc()->meshDoc.mm();}
     inline MeshDocument *md() {if (mvc() == NULL) return NULL;return &(mvc()->meshDoc);}
 
+	// 定义轨迹球对象
     vcg::Trackball trackball;
     vcg::Trackball trackball_light;
     void Logf(int Level, const char * f, ... );
