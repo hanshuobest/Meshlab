@@ -245,7 +245,7 @@ public:
 
   //operating
   /*!
-    @brief Initialize the camera instance.
+    @brief Initialize the camera instance.初始化相机实例
   */
   void GetView();
 
